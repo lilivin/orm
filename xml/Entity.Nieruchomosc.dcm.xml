@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Entity\Nieruchomosc" table="nieruchomosci" repository-class="Repository\NieruchomoscRepository">
+        <id name="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="typ_oferty" type="string" length="5" />
+        <field name="powierzchnia" type="float" />
+        <field name="cena" type="float" />
+        <field name="cena_m2" type="float" />
+
+        <one-to-one field="mieszkanie" target-entity="Mieszkanie" mapped-by="nieruchomosc">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove/>
+            </cascade>
+        </one-to-one>
+        <one-to-one field="dom" target-entity="Dom" mapped-by="nieruchomosc">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove/>
+            </cascade>
+        </one-to-one>
+        <one-to-one field="grunt" target-entity="Grunt" mapped-by="nieruchomosc" >
+            <cascade>
+                <cascade-persist />
+                <cascade-remove/>
+            </cascade>
+        </one-to-one>
+        <many-to-one field="miasto" target-entity="Miasto" />
+        <one-to-many field="material" target-entity="Material" mapped-by="nieruchomosc" />
+        <many-to-many field="opcjekomunikacji" target-entity="Komunikacja">
+            <join-table name="nieruchomosci_komunikacja">
+                <join-columns>
+                    <join-column name="nieruchomosc_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="komunikacja_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many field="dodatkowe" target-entity="Dodatkowe">
+            <join-table name="nieruchomosci_dodatkowe">
+                <join-columns>
+                    <join-column name="nieruchomosc_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="dodatkowe_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+    </entity>
+</doctrine-mapping>

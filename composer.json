@@ -1,0 +1,21 @@
+{
+    "name": "wit/orm",
+    "description": "Demo project for ORM class",
+    "require": {
+        "php": "^7.4",
+        "doctrine/orm": "^2.8",
+        "doctrine/migrations": "^2.3",
+        "vlucas/valitron": "^1.4",
+        "doctrine/doctrine-laminas-hydrator": "^2.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Entity\\": "./",
+            "Repository\\": "./",
+            "Model\\": "./"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    }
+}
